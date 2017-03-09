@@ -27,11 +27,19 @@ var grid = function (height, width) {
     }
 
     function getx(x) {
-        return x % _this.width;
+        var newx = x % _this.width;
+        if(newx < 0)
+            newx = _this.width + newx;
+
+        return newx;
     }
 
     function gety(y) {
-        return y % _this.height;
+        var newy = y % _this.height;
+        if(newy < 0)
+            newy = _this.height + newy;
+
+        return newy;
     }
 
     return {
