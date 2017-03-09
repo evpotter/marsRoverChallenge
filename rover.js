@@ -7,6 +7,8 @@ var rover = function (x, y, direction, grid) {
 
     function commandSequence(sequence) {
         sequence.forEach(runCommand);
+
+        return getMyCoord();
     }
 
     function runCommand(command) {
@@ -28,9 +30,21 @@ var rover = function (x, y, direction, grid) {
         }
 
         if(axis == 'x') {
-            _this.x = moveFunc(_this.x, mag);
+            var newX = moveFunc(_this.x, mag);
+            newX = _this.grid.getX(newX);
+            if(_this.grid.checkCoordinates(newX, _this.y)) {
+                return "obstacle";
+            }
+
+            _this.x = newX;
         } else {
-            _this.y = moveFunc(_this.y, mag);
+            var newY = moveFunc(_this.y, mag);
+            newY = _this.grid.getY(newY);
+            if(_this.grid.checkCoordinates(_this.x, newY)) {
+                return "obstacle";
+            }
+
+            _this.y = newY;
         }
     }
 
@@ -56,6 +70,10 @@ var rover = function (x, y, direction, grid) {
                 _this.directionPair.mag *= -1;
             }
         }
+    }
+
+    function getMyCoord() {
+        return { x: _this.x, y: _this.y};
     }
     
     function getDirection() {

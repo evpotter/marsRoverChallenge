@@ -22,7 +22,25 @@ var grid = function (height, width) {
         return _this.grid;
     }
 
+    function checkCoord(x, y) {
+        if(_this.grid[x][y])
+            return "obstical";
+
+        return true;
+    }
+
+    function getx(x) {
+        return x % _this.width;
+    }
+
+    function gety(y) {
+        return y % _this.height;
+    }
+
     return {
-        getGrid: getGridBack
+        getGrid: getGridBack,
+        checkCoordinates: checkCoord,
+        getX: getx,
+        getY: gety
     }
 };
