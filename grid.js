@@ -23,10 +23,7 @@ var grid = function (height, width) {
     }
 
     function checkCoord(x, y) {
-        if(_this.grid[x][y])
-            return "obstical";
-
-        return true;
+        return _this.grid[x][y];
     }
 
     function getx(x) {
